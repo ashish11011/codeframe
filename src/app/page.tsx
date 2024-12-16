@@ -1,8 +1,10 @@
 'use client';
-import { CircleArrowRight } from 'lucide-react';
+import { ArrowRight, CircleArrowRight } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import Navbar from '@/components/navBar';
 import { cn } from '@/utils/cn';
+import Footer from '@/components/footer';
+import { data, desc } from 'framer-motion/client';
 
 const App = () => {
   return (
@@ -11,7 +13,10 @@ const App = () => {
       <TrustDelivery />
       <OurMission />
       <Services />
-      <div className="h-96"></div>
+      <Portfolio />
+      <Testimonial />
+      <WorkWithUs />
+      <Footer />
     </div>
   );
 };
@@ -34,9 +39,11 @@ function GradientText({ children, className }: any) {
 function HeroSection() {
   const x = new Array(100).fill(1);
   return (
-    <div className="h-screen w-full overflow-hidden bg-[#020103]">
+    <div className="relative h-screen w-full overflow-hidden bg-[#020103]">
       <Navbar />
-      <div className="absolute -bottom-14 z-10 h-48 w-full bg-gradient-to-t from-neutral-900 to-transparent md:bottom-0"></div>
+
+      {/* Black gradient upper and down part */}
+      <div className="absolute bottom-0 z-10 h-48 w-full bg-gradient-to-t from-neutral-900 to-transparent md:bottom-0"></div>
       <div className="absolute top-0 z-10 h-48 w-full bg-gradient-to-b from-neutral-900 to-transparent"></div>
 
       <div className="absolute -left-12 bottom-8 h-28 w-72 overflow-hidden bg-[#88FCF2]/80 blur-[80px] md:bottom-36 md:left-0 md:h-48 md:w-96 md:blur-[150px]"></div>
@@ -279,5 +286,219 @@ function CircleArrowRightLink({ className }: { className?: string }) {
         className
       )}
     />
+  );
+}
+
+function WorkWithUs() {
+  return (
+    <div className="mx-auto flex w-full max-w-7xl flex-col justify-between gap-4 bg-dark px-4 py-10 md:flex-row md:py-12">
+      <GradientText className="text-5xl font-semibold">
+        Work With Us
+      </GradientText>
+      <p className="text-gray-200">
+        help you to build website company that is modern,
+        <br />
+        user friendly, good SEO, and Clean design
+      </p>
+    </div>
+  );
+}
+
+function Testimonial() {
+  const testimonialData = [
+    {
+      name: 'John Doe',
+      position: 'CEO',
+      companyName: 'ABC Company',
+      description:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, dolor?',
+      img: './person.png',
+    },
+    {
+      name: 'John Doe',
+      position: 'CEO',
+      companyName: 'ABC Company',
+      description:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, dolor?',
+      img: './person.png',
+    },
+    {
+      name: 'John Doe',
+      position: 'CEO',
+      companyName: 'ABC Company',
+      description:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, dolor?',
+      img: './person.png',
+    },
+    {
+      name: 'John Doe',
+      position: 'CEO',
+      companyName: 'ABC Company',
+      description:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, dolor?',
+      img: './person.png',
+    },
+  ];
+
+  return (
+    <div className="h-full w-full bg-dark">
+      <div className="relative mx-auto flex h-full w-full max-w-7xl flex-col gap-6 px-4 py-10">
+        {/* Dubble blur codes */}
+        <div className="absolute left-2 top-2 size-40">
+          <img
+            src="./blur-codes.png"
+            className="h-full w-full object-contain"
+            alt=""
+          />
+        </div>
+        {/* Testimonial heading */}
+        <div className="flex flex-col gap-2 md:gap-4">
+          <GradientText className="text-3xl font-medium md:text-5xl">
+            Let Team Speak For You
+          </GradientText>
+          <p className="text-gray-200">
+            Our latest work, working with the best
+          </p>
+        </div>
+        {/* Testimonial */}
+        <div className="grid w-full grid-cols-1 gap-6 px-6 md:grid-cols-2 md:px-2 xl:grid-cols-4">
+          {testimonialData.map((data, i) => (
+            <TestimonialCard index={i} data={data} key={i} />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function TestimonialCard({
+  data,
+  index,
+}: {
+  data: {
+    name: string;
+    position: string;
+    companyName: string;
+    description: string;
+    img: string;
+  };
+  index: number;
+}) {
+  return (
+    <div className="mx-auto flex w-full flex-col gap-8 rounded-3xl border border-cyan-700 bg-neutral-900 px-4 py-6 text-gray-200 md:w-full">
+      {/* image */}
+      <div className="size-12 overflow-hidden rounded-full border">
+        <img
+          className="h-full w-full object-cover"
+          src={data.img}
+          alt="profile image"
+        />
+      </div>
+      <div className="flex flex-col gap-3">
+        <div className="flex items-center gap-2">
+          <div className="size-4">
+            <img
+              className="h-full w-full object-contain"
+              src="./dubble-cods.png"
+              alt=""
+            />
+          </div>
+          <p> 0{index + 1}</p>
+        </div>
+        <div className="">{data.description}</div>
+      </div>
+      <div className="relative flex flex-col p-2">
+        <div className="absolute left-0 top-0 h-full w-[1.5px] rounded bg-gradient-to-b from-cyan-600 to-cyan-800"></div>
+        <p className="text-sm">{data.name}</p>
+        <p className="text-sm text-gray-500">{data.position}</p>
+        <p className="text-sm text-gray-500">{data.companyName}</p>
+      </div>
+    </div>
+  );
+}
+
+// Show case of all the projects
+function Portfolio() {
+  const portfolioData = [
+    {
+      name: 'Filltex',
+      description:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, dolor? sit amet consectetur adipisicing elit. Aperiam, dolor?',
+      img: './person.png',
+      websiteLink: 'https://www.filltex.com/',
+      caseStudyLink: '',
+    },
+    {
+      name: 'Chal Chitrakaar',
+      description:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, dolor? sit amet consectetur adipisicing elit. Aperiam, dolor?',
+      img: './chalchitrakaar-website.png',
+      websiteLink: 'https://www.chalchitrakaar.com/',
+      caseStudyLink: '',
+    },
+    {
+      name: 'Cozzy corner',
+      description:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, dolor? sit amet consectetur adipisicing elit. Aperiam, dolor?',
+      img: './cozzy-corner-website.png',
+      websiteLink: 'https://www.cozzycorner.com/',
+      caseStudyLink: '',
+    },
+  ];
+
+  return (
+    <div className="w-full bg-neutral-900 px-4 py-8 text-gray-200">
+      <div className="mx-auto flex max-w-7xl flex-col gap-8">
+        <div className="flex flex-col gap-2 md:gap-4">
+          <GradientText className="text-3xl font-medium md:text-5xl">
+            Our Success Stories
+          </GradientText>
+          <div className="flex flex-col justify-between gap-6 md:flex-row">
+            <p>Our latest work, working with the best</p>
+            <div className="flex w-fit items-center justify-center gap-2 rounded-3xl border border-cyan-700 px-4 py-2">
+              All Portfolio
+              <ArrowRight
+                size={20}
+                className="-rotate-45 rounded-full border p-1"
+                color="#fff"
+              />
+            </div>
+          </div>
+        </div>
+        <div className="flex flex-col gap-4 divide-y divide-cyan-400">
+          {portfolioData.map((data, i) => (
+            <PortfolioCard data={data} key={i} />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function PortfolioCard({
+  data,
+}: {
+  data: {
+    name: string;
+    description: string;
+    img: string;
+    websiteLink: string;
+    caseStudyLink: string;
+  };
+}) {
+  return (
+    <div className="flex w-full flex-col justify-between gap-8 py-8 text-gray-200 md:flex-row md:gap-16">
+      <div className="flex flex-col gap-2 md:gap-4">
+        <p className="font-lato text-2xl font-medium">{data.name}</p>
+        <p className="text-sm text-gray-400 md:text-base">{data.description}</p>
+        <div className="mt-2 flex gap-4">
+          <div className="rounded-3xl border px-4 py-2">View Website</div>
+          <div className="rounded-3xl border px-4 py-2">Read Case Study</div>
+        </div>
+      </div>
+      <div className="h-auto w-full max-w-xl overflow-hidden rounded-md md:h-80">
+        <img className="h-full w-full object-cover" src={data.img} alt="img" />
+      </div>
+    </div>
   );
 }
